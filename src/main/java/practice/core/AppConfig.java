@@ -19,17 +19,22 @@ public class AppConfig {
 
     @Bean
     public MemberService memberService() {
+        //System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
     public MemberRepository memberRepository() {
+        //System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
+
     //리팩토링을 통해서 각 역할은 구체화 할 수 있다.
     @Bean
     public OrderService orderService() {
+        //System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
+        //return null;
     }
 
     //할인 정책 변경시에 discount policy만 수정하면 된다.
