@@ -1,7 +1,9 @@
 package practice.core.order;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import practice.core.annotation.MainDiscountPolicy;
 import practice.core.discount.DiscountPolicy;
 import practice.core.discount.FixDiscountPolicy;
 import practice.core.discount.RateDiscountPolicy;
@@ -10,6 +12,7 @@ import practice.core.member.MemberRepository;
 import practice.core.member.MemoryMemberRepository;
 
 @Component
+//@RequiredArgsConstructor //final 붙은 두개의 생성자를 자동으로 만들어줌
 public class OrderServiceImpl implements OrderService {
 
     /*필드 주입
@@ -43,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
 
     //생성자를 통해서 주입된다.(이 클래스는 구체적 클래스를 모른다)
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy  DiscountPolicy discountPolicy) {
         //System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
